@@ -48,6 +48,39 @@
             </div>
         </div>
     </div>
+	<div class="container panel panel-default" style="margin-top:20px">
+	   <div>
+                                                <h2 class="section-title text-dev-orange">
+                                                    Using The Encrypted Data On Your Server
+                                                    </h3>
+                                            </div>
+                                            <div>
+                                                <ul class="itemizedList">
+                                                    <li>Simply replace the credit card element of a createTransaction call with the opaqueData element where the dataValue contains the Encrypted Blob above.  <a href="http://developer.authorize.net/api/reference/#payment-transactions-charge-a-credit-card"> See CreateTransaction call in our API Reference.</a> For example: <para> 
+                                                    <pre class="prettyprint lang-css linenums" id="successcode">
+&lt;createTransactionRequest xmlns=&quot;AnetApi/xml/v1/schema/AnetApiSchema.xsd&quot;&gt;
+  &lt;merchantAuthentication&gt;
+    &lt;name&gt;yours&lt;/name&gt;
+    &lt;transactionKey&gt;yours&lt;/transactionKey&gt;
+  &lt;/merchantAuthentication&gt;
+  &lt;transactionRequest&gt;
+    &lt;transactionType&gt;authCaptureTransaction&lt;/transactionType&gt;
+    &lt;amount&gt;75.00&lt;/amount&gt;
+    &lt;payment&gt;
+      &lt;opaqueData&gt;
+        &lt;dataDescriptor&gt;COMMON.WCO.INAPP.PAYMENT.V2&lt;/dataDescriptor&gt;
+       &lt;dataValue&gt;blob_here&lt;/ dataValue &gt;
+      &lt;/opaqueData&gt;  
+    &lt;/payment&gt;
+  &lt;/transactionRequest&gt;
+&lt;/createTransactionRequest&gt;
+   
+</pre></para>
+                                                    </li>
+												</ul>
+											</div>
+
+	</div>
     <script type="text/javascript">
     var blob = "";
 
@@ -98,3 +131,6 @@
 </body>
 
 </html>
+
+
+

@@ -85,7 +85,7 @@
     var blob = "";
 
     function buildFingerPrint() {
-        var url = "https://showco.azurewebsites.net/indexCert.php"; // Fingerprint Service URL from your Server    
+        var url = "http://dpm.azurewebsites.net/getfingerprint.php"; // Fingerprint Service URL from your Server    
         var deferred = $.Deferred();
         $.get(url, function(responseText) {
             try {

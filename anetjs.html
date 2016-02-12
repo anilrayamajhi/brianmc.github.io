@@ -108,7 +108,7 @@
             cardData.year = document.getElementById('EXPIRY_YEAR_ID').value;
             secureData.cardData = cardData;
             authData.fingerprint = fingerprint;
-            authData.apiLoginID = '5KP3u95bQpv';
+            //authData.apiLoginID = '5KP3u95bQpv';
             secureData.authData = authData;
             AuthorizeNet.dispatchData(secureData, 'responseHandler');
         })

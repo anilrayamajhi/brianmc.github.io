@@ -8,7 +8,7 @@
             onPopupClosed: null
         , eCheckEnabled: false
         , skipZIndexCheck: false
-        , useTestEnvironment: false
+        , useTestEnvironment: true
         };
         AuthorizeNetPopup.closePopup = function () {
             document.getElementById("divAuthorizeNetPopupScreen").style.display = "none";
@@ -83,9 +83,9 @@
             if (AuthorizeNetPopup.options.useLocalEnvironment) {
                 form.action = opt.action;
             } else if (AuthorizeNetPopup.options.useTestEnvironment) {
-                form.action = "https://test.authorize.net/profile/" + opt.action;
+                form.action = "https://test.authorize.net/customer/" + opt.action;
             } else {
-                form.action = "https://secure.authorize.net/profile/" + opt.action;
+                form.action = "https://secure.authorize.net/customer/" + opt.action;
             }
             if (form.elements["PaymentProfileId"]) form.elements["PaymentProfileId"].value = opt.paymentProfileId ? opt.paymentProfileId : "";
             if (form.elements["ShippingAddressId"]) form.elements["ShippingAddressId"].value = opt.shippingAddressId ? opt.shippingAddressId : "";

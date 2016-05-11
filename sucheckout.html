@@ -1,0 +1,43 @@
+<html>
+ <head>
+  <script type="text/javascript">
+   function onVisaCheckoutReady() {
+     V.init({
+     apikey: "Y8X0Z3U2VM4C82T048UG13264sJ_SwXXtEFrzn0jr2KuC-8oo",
+     paymentRequest: {
+      currencyCode: "USD",
+      "amount" : "16"
+    },
+    settings: {
+      locale: "en_US",
+      countryCode: "US",
+      displayName: "...Corp",
+      logoUrl: "www.Some_Image_URL.gif",
+      websiteUrl: "www....Corp.com",
+      customerSupportUrl: "www....Corp.support.com",
+      shipping: {
+       acceptedRegions: ["US", "CA"],
+       collectShipping: "true"
+      },
+      payment: {
+       cardBrands: [
+        "VISA",
+        "MASTERCARD"],
+       acceptCanadianVisaDebit: "true"
+      },
+      review: {
+       message: "Merchant defined message",
+       buttonAction: "Continue"
+      },
+     dataLevel: "FULL"
+     }
+   }
+  );
+V.on("payment.success", function(payment) {alert(JSON.stringify(payment)); console.log("It worked!");console.log(JSON.stringify(payment)); }); V.on("payment.cancel", function(payment) {alert(JSON.stringify(payment)); console.log("Someone cancelled!");console.log(JSON.stringify(payment));}); V.on("payment.error", function(payment, error) {alert(JSON.stringify(error)); console.log("Ooops!");console.log(JSON.stringify(payment)); }); }  </script> </head> <body>  <img alt="Visa Checkout" class="v-button" role="button"
+ src="https://sandbox.secure.checkout.visa.com/wallet-services-web/xo/button.png?
+  cardBrands=VISA,MASTERCARD,DISCOVER,AMEX"/>
+ <script type="text/javascript"
+  src="https://sandbox-assets.secure.checkout.visa.com/checkout-widget/resources/js/integration/v1/sdk.js">
+ </script>
+</body>
+</html>

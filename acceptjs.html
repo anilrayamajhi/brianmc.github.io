@@ -9,7 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="https://jstest.authorize.net/v1/AuthorizeNet.js"></script>
+    <script src="https://jsced.labwebapp.com/v1/accept.js"></script>
 </head>
 
 <body>
@@ -83,33 +83,20 @@
 	</div>
     <script type="text/javascript">
     var blob = "";
-    function buildFingerPrint() {
-        var url = "https://dpm2.azurewebsites.net/getfingerprint.php"; // Fingerprint Service URL from your Server    
-        var deferred = $.Deferred();
-        $.get(url, function(responseText) {
-            try {
-                deferred.resolve(JSON.parse(responseText));
-            } catch (e) {
-                console.log("fingerprint is not a valid JSON" + responseText)
-            }
-        });
-        return deferred.promise();
-    }
+
     function getSecureData() {
-        var promise = buildFingerPrint(); // for accessing fingerprint from server using AJAX call. See More
-        promise.then(function(fingerprint) {
-            var secureData = {},
-                authData = {},
-                cardData = {};
-            cardData.cardNumber = document.getElementById('CARDNUMBER_ID').value;
-            cardData.month = document.getElementById('EXPIRY_MONTH_ID').value;
-            cardData.year = document.getElementById('EXPIRY_YEAR_ID').value;
-            secureData.cardData = cardData;
-            authData.fingerprint = fingerprint;
-            authData.apiLoginID = '5KP3u95bQpv';
-            secureData.authData = authData;
-            AuthorizeNet.dispatchData(secureData, 'responseHandler');
-        })
+
+	    var secureData = {},
+	        authData = {},
+	        cardData = {};
+	    cardData.cardNumber = document.getElementById('CARDNUMBER_ID').value;
+	    cardData.month = document.getElementById('EXPIRY_MONTH_ID').value;
+	    cardData.year = document.getElementById('EXPIRY_YEAR_ID').value;
+	    secureData.cardData = cardData;
+	    authData.clientKey = '2QQaG4X883pu5tpPwxsE4GTVgy5r3aMahFKA72J6J53HW9dMHABYSx3Gw5E2c6wx';
+	    authData.apiLoginID = '5KP3u95bQpv';
+	    secureData.authData = authData;
+	    AuthorizeNet.dispatchData(secureData, 'responseHandler');
     }
     function responseHandler(response) {
         if (response.messages.resultCode === 'Error') {

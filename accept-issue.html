@@ -91,20 +91,21 @@ authData.apiLoginID = '5KP3u95bQpv';
 secureData.authData = authData;
 Accept.dispatchData(secureData, 'responseHandler');
 }
-function responseHandler(response) {
-if (response.messages.resultCode === 'Error') {
-for (var i = 0; i < response.messages.message.length; i++) {
-console.log(response.messages.message[i].code + ':' + response.messages.message[i].text);
-$("#blob").val(response.messages.message[i].code + ':' + response.messages.message[i].text);
-}
-} else {
-   useOpaqueData(response.opaqueData)
-}
+
+function  responseHandler(response) {
+	if (response.messages.resultCode === 'Error') {
+		for (var i = 0; i < response.messages.message.length; i++) {
+			console.log(response.messages.message[i].code + ':' + response.messages.message[i].text);
+		}
+		alert('acceptJS library error!');
+	} else {
+		postBackToMyServer(response.opaqueData);
+	}
 }
 
-function useOpaqueData(responseData) {
-console.log(responseData.dataDescriptor);
-console.log(responseData.dataValue);
+function postBackToMyServer(response) {
+console.log(response.dataDescriptor);
+console.log(response.dataValue);
 $("#blob").val(responseData.dataValue);
 }
 

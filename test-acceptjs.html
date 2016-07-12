@@ -97,11 +97,16 @@ console.log(response.messages.message[i].code + ':' + response.messages.message[
 $("#blob").val(response.messages.message[i].code + ':' + response.messages.message[i].text);
 }
 } else {
-console.log(response.opaqueData.dataValue);
-blob = response.opaqueData.dataValue;
-$("#blob").val(blob);
+   useOpaqueData(response.opaqueData)
 }
 }
+
+function useOpaqueData(responseData) {
+console.log(responseData.dataDescriptor);
+console.log(responseData.dataValue);
+$("#blob").val(responseData.dataValue);
+}
+
 </script>
 </body>
 </html>

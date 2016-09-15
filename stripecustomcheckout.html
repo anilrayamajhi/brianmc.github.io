@@ -11,6 +11,9 @@
     token: function(token) {
       // Use the token to create the charge with a server-side script.
       // You can access the token ID with `token.id`
+        
+        console.log("Stripe Token : "+token.id+" Card: "+token.card);
+        
     }
   });
 

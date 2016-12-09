@@ -1,0 +1,86 @@
+<html lang="en">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=10" />
+<title>Accept.JS Example</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="https://jstest.authorize.net/v2/Accept.js" charset="utf-8"></script>
+</head>
+<body>
+<div class="container panel panel-default" style="margin-top:20px">
+<div class="form-group" style="margin-left: 0px; margin-right: 0px;">
+<div class="col-md-offset-3 col-sm-offset-3 col-lg-offset-3 col-md-8 col-lg-8 col-sm-8">
+<button type="submit" id="pay" class="btn btn-primary btn-lg btn-block" onclick="getSecureData()">Get Payment Nonce</button>
+</div>
+</div>
+</div>
+<div class="container panel panel-default" style="margin-top:20px">
+<div>
+<h2 class="section-title text-dev-orange">
+Using The Payment Nonce On Your Server
+</h3>
+</div>
+<div>
+<ul class="itemizedList">
+<li>Simply replace the credit card element of a createTransaction call with the opaqueData element where the dataValue contains the Encrypted Blob above. <a href="http://developer.authorize.net/api/reference/#payment-transactions-charge-a-credit-card"> See CreateTransaction call in our API Reference.</a> For example: <para>
+<pre class="prettyprint lang-css linenums" id="successcode">
+&lt;createTransactionRequest xmlns=&quot;AnetApi/xml/v1/schema/AnetApiSchema.xsd&quot;&gt;
+&lt;merchantAuthentication&gt;
+&lt;name&gt;yours&lt;/name&gt;
+&lt;transactionKey&gt;yours&lt;/transactionKey&gt;
+&lt;/merchantAuthentication&gt;
+&lt;transactionRequest&gt;
+&lt;transactionType&gt;authCaptureTransaction&lt;/transactionType&gt;
+&lt;amount&gt;75.00&lt;/amount&gt;
+&lt;payment&gt;
+&lt;opaqueData&gt;
+&lt;dataDescriptor&gt;COMMON.ACCEPT.INAPP.PAYMENT&lt;/dataDescriptor&gt;
+&lt;dataValue&gt;nonce_here&lt;/dataValue &gt;
+&lt;/opaqueData&gt;
+&lt;/payment&gt;
+&lt;/transactionRequest&gt;
+&lt;/createTransactionRequest&gt;
+</pre></para>
+</li>
+</ul>
+</div>
+</div>
+<script type="text/javascript">
+var blob = "";
+function getSecureData() {
+var secureData = {},
+authData = {},
+cardData = {};
+cardData.cardNumber = document.getElementById('CARDNUMBER_ID').value;
+cardData.month = document.getElementById('EXPIRY_MONTH_ID').value;
+cardData.year = document.getElementById('EXPIRY_YEAR_ID').value;
+cardData.zip  = document.getElementById('ZIP_CODE').value;
+cardData.cardCode  = document.getElementById('CARD_CODE').value;   
+secureData.cardData = cardData;
+authData.clientKey = '5FcB6WrfHGS76gHW3v7btBCE3HuuBuke9Pj96Ztfn5R32G5ep42vne7MCWZtAucY';
+authData.apiLoginID = '5KP3u95bQpv';
+secureData.authData = authData;
+Accept.dispatchData(secureData, 'responseHandler');
+}
+function responseHandler(response) {
+if (response.messages.resultCode === 'Error') {
+for (var i = 0; i < response.messages.message.length; i++) {
+console.log(response.messages.message[i].code + ':' + response.messages.message[i].text);
+$("#blob").val(response.messages.message[i].code + ':' + response.messages.message[i].text);
+}
+} else {
+   useOpaqueData(response.opaqueData)
+}
+}
+
+function useOpaqueData(responseData) {
+console.log(responseData.dataDescriptor);
+console.log(responseData.dataValue);
+$("#blob").val(responseData.dataValue);
+}
+
+</script>
+</body>
+</html>

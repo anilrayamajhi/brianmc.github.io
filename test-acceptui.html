@@ -50,15 +50,7 @@ Using The Payment Nonce On Your Server
 <script type="text/javascript">
 var blob = "";
 function getSecureData() {
-var secureData = {},
-authData = {},
-cardData = {};
-cardData.cardNumber = document.getElementById('CARDNUMBER_ID').value;
-cardData.month = document.getElementById('EXPIRY_MONTH_ID').value;
-cardData.year = document.getElementById('EXPIRY_YEAR_ID').value;
-cardData.zip  = document.getElementById('ZIP_CODE').value;
-cardData.cardCode  = document.getElementById('CARD_CODE').value;   
-secureData.cardData = cardData;
+alert("Accept form will show here");
 authData.clientKey = '5FcB6WrfHGS76gHW3v7btBCE3HuuBuke9Pj96Ztfn5R32G5ep42vne7MCWZtAucY';
 authData.apiLoginID = '5KP3u95bQpv';
 secureData.authData = authData;

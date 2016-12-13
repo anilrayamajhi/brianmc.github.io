@@ -12,7 +12,7 @@
 <div class="container panel panel-default" style="margin-top:20px">
 <div class="form-group" style="margin-left: 0px; margin-right: 0px;">
 <div class="col-md-offset-3 col-sm-offset-3 col-lg-offset-3 col-md-8 col-lg-8 col-sm-8">
-<button type="submit" id="pay" class="btn btn-primary btn-lg btn-block" onclick="getSecureData()">Get Payment Nonce</button>
+<button type="submit" id="pay" class="btn btn-primary btn-lg btn-block" onclick="getSecureData()">Get Payment Nonce (with UI)</button>
 </div>
 </div>
 </div>
@@ -50,28 +50,40 @@ Using The Payment Nonce On Your Server
 <script type="text/javascript">
 var blob = "";
 function getSecureData() {
-alert("Accept form will show here");
-authData.clientKey = '5FcB6WrfHGS76gHW3v7btBCE3HuuBuke9Pj96Ztfn5R32G5ep42vne7MCWZtAucY';
-authData.apiLoginID = '5KP3u95bQpv';
-secureData.authData = authData;
-Accept.dispatchData(secureData, 'responseHandler');
-}
-function responseHandler(response) {
-if (response.messages.resultCode === 'Error') {
-for (var i = 0; i < response.messages.message.length; i++) {
-console.log(response.messages.message[i].code + ':' + response.messages.message[i].text);
-$("#blob").val(response.messages.message[i].code + ':' + response.messages.message[i].text);
-}
-} else {
-   useOpaqueData(response.opaqueData)
-}
+      var parameters = {};
+      parameters.showBilling = true;
+      parameters.apiLoginID = '5KP3u95bQpv';
+      parameters.clientKey = '5FcB6WrfHGS76gHW3v7btBCE3HuuBuke9Pj96Ztfn5R32G5ep42vne7MCWZtAucY';
+      callbackFn = 'callbackMerchant';
+                                
+      parameters.buttonText = 'Pay';
+      parameters.headerText = 'User Payment Form';
+         
+      Accept.showForm(button, parameters, callbackFn);
+
 }
 
-function useOpaqueData(responseData) {
-console.log(responseData.dataDescriptor);
-console.log(responseData.dataValue);
-$("#blob").val(responseData.dataValue);
-}
+function populateErrorMessage(response) {
+		var text = '';
+		for (var i = 0; i < response.messages.message.length; i++) {
+		  text = text + response.messages.message[i].code + ':' + response.messages.message[i].text + '\n';
+		}
+		console.log(text);
+	  };
+   
+function callbackMerchant(response) {
+    if (response.messages.resultCode === 'Error') {
+      populateErrorMessage(response);
+    } else {
+		  var msg01 = '<b>' + response.opaqueData.dataDescriptor + '</b> : ' + response.opaqueData.dataValue;
+		  var msg02 = '<b>CARD NUMBER</b> : ' + response.encryptedCardData.cardNumber + '<br/>' + '<b>EXPIRATION DATE</b> : ' + response.encryptedCardData.expDate + '<br/>' + '<b>BIN</b> : '+ response.encryptedCardData.bin;
+		  if ($('#paymentReceipt').length == 0) {
+            $('body').append($('<br/><br/><div id = "paymentReceipt" style="margin: auto;border: 1px solid black;padding: 15px;width: 50%;"></div>'));
+		  }
+		  $('#paymentReceipt').html(msg01 + '<br/><hr>' + msg02);
+    }
+  }
+   
 
 </script>
 </body>

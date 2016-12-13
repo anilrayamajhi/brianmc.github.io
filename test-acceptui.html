@@ -12,7 +12,7 @@
 <div class="container panel panel-default" style="margin-top:20px">
 <div class="form-group" style="margin-left: 0px; margin-right: 0px;">
 <div class="col-md-offset-3 col-sm-offset-3 col-lg-offset-3 col-md-8 col-lg-8 col-sm-8">
-<button type="submit" id="pay" class="btn btn-primary btn-lg btn-block" onclick="getSecureData()">Get Payment Nonce (with UI)</button>
+<button type="submit" id="pay" class="btn btn-primary btn-lg btn-block" onclick="getSecureData(this)">Get Payment Nonce (with UI)</button>
 </div>
 </div>
 </div>
@@ -49,7 +49,7 @@ Using The Payment Nonce On Your Server
 </div>
 <script type="text/javascript">
 var blob = "";
-function getSecureData() {
+function getSecureData(button) {
       var parameters = {};
       parameters.showBilling = true;
       parameters.apiLoginID = '5KP3u95bQpv';

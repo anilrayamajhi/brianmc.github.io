@@ -24,7 +24,7 @@ Using The Payment Nonce On Your Server
 </div>
 <div>
 <ul class="itemizedList">
-<li>Simply replace the credit card element of a createTransaction call with the opaqueData element where the dataValue contains the Encrypted Blob above. <a href="http://developer.authorize.net/api/reference/#payment-transactions-charge-a-credit-card"> See CreateTransaction call in our API Reference.</a> For example: <para>
+<li>Simply replace the credit card element of a createTransaction call with the opaqueData element where the dataValue contains the Payment Nonce below. <a href="http://developer.authorize.net/api/reference/#payment-transactions-charge-a-credit-card"> See CreateTransaction call in our API Reference.</a> For example: <para>
 <pre class="prettyprint lang-css linenums" id="successcode">
 &lt;createTransactionRequest xmlns=&quot;AnetApi/xml/v1/schema/AnetApiSchema.xsd&quot;&gt;
 &lt;merchantAuthentication&gt;
@@ -75,12 +75,13 @@ function callbackMerchant(response) {
     if (response.messages.resultCode === 'Error') {
       populateErrorMessage(response);
     } else {
-		  var msg01 = '<b>' + response.opaqueData.dataDescriptor + '</b> : ' + response.opaqueData.dataValue;
-		  var msg02 = '<b>CARD NUMBER</b> : ' + response.encryptedCardData.cardNumber + '<br/>' + '<b>EXPIRATION DATE</b> : ' + response.encryptedCardData.expDate + '<br/>' + '<b>BIN</b> : '+ response.encryptedCardData.bin;
+		  var msg01 = '<b> PAYMENT NONCE (Data Value) : </b> ' + response.opaqueData.dataValue;
+	          var msg02 = '<b> TYPE (Data Descriptor) : </b> ' + response.opaqueData.dataDescriptor;
+		  var msg03 = '<b>CARD NUMBER</b> : ' + response.encryptedCardData.cardNumber + '<br/>' + '<b>EXPIRATION DATE</b> : ' + response.encryptedCardData.expDate + '<br/>' + '<b>BIN</b> : '+ response.encryptedCardData.bin;
 		  if ($('#paymentReceipt').length == 0) {
             $('body').append($('<br/><br/><div id = "paymentReceipt" style="margin: auto;border: 1px solid black;padding: 15px;width: 50%;"></div>'));
 		  }
-		  $('#paymentReceipt').html(msg01 + '<br/><hr>' + msg02);
+		  $('#paymentReceipt').html(msg01 + '<br/><hr>' + msg02 + '<br/><hr>' + msg03);
     }
   }
    

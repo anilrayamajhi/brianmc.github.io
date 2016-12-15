@@ -46,25 +46,25 @@
 
       <div class="row marketing">
         <div class="col-lg-6">
-          <h4>Subheading</h4>
-          <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+          <h4>Overview</h4>
+          <p>This page demonstrates the retrieval of an OAuth 2.0 Access Token which can be used by an Authorize.Net partner (client application - see below) to access Authorize.Net ON BEHALF OF an Authorize.Net merchant (Resource Owner - see below).</p>
 
-          <h4>Subheading</h4>
-          <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+          <h4>OAuth 2.0 Clients</h4>
+          <p>In OAuth 2.0 nomenclature an Authorize.Net partner application (e.g. shopping cart, analytics application, invoicing solution, etc) is referred to as a Client Application.</p>
 
-          <h4>Subheading</h4>
-          <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+          <h4>OAuth 2.0 Resource Owners</h4>
+          <p>In the Authorize.Net ecosystem, the Resource Owners are merchants.  The client applications use the Authorize.Net OAuth 2.0 flow to transact with the merchant resources via our APIs. E.g. retrieve merchant subscriptions data.</p>
         </div>
 
         <div class="col-lg-6">
-          <h4>Subheading</h4>
-          <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+          <h4>Step 1:</h4>
+          <p>Connect with the Authorize.Net OAuth 2.0 Authorization endpoint (see source behind button above).</p>
 
-          <h4>Subheading</h4>
-          <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+          <h4>Step 2:</h4>
+          <p>Use the Authorization Code returned from Step 1 to retrieve an Access Token (and Refresh Token) from our /token RESTful endpoint.</p>
 
-          <h4>Subheading</h4>
-          <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+          <h4>Step 3:</h4>
+          <p>Use the Access Code from Step 2 to access the Authorize.Net API.</p>
         </div>
       </div>
 

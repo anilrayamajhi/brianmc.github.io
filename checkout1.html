@@ -1,21 +1,3 @@
-<form method="post" action="https://test.authorize.net/gateway/transact.dll">
-  
-<?php 
-
-  $api_login_id = "5KP3u95bQpv";
-  $transaction_key = "346HZ32z3fP4hTG2";
-  $amount = "9.99";
-  $fp_sequence = rand ( 100, 10000 );
-  $fp_timestamp = time();
-  
-  $fingerprint = hash_hmac("md5", $api_login_id . "^" . $fp_sequence . "^" . $fp_timestamp . "^" . $amount . "^",  $transaction_key);
-?>
-
-<input type = "hidden" name = "x_login" value = "<?php echo $api_login_id; ?>" />
-<input type='hidden' name="x_fp_hash" value="<?php echo $fingerprint; ?>" />
-<input type='hidden' name="x_fp_timestamp" value="<?php echo $fp_timestamp; ?>" />
-<input type='hidden' name="x_fp_sequence" value="<?php echo $fp_sequence; ?>" />
-<input type = "hidden" name = "x_show_form" value = "payment_form">
-<input type = "hidden" name = "x_amount" value = "<?php echo $amount; ?>">
-<input type="submit" value="Buy Now"/>
-</form>
+<HEAD>
+  <meta http-equiv="refresh" content="0; url=http://legacy-sample.azurewebsites.net/oldhop.php" />
+</HEAD>

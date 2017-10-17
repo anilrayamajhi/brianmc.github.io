@@ -5,7 +5,7 @@
   $api_login_id = "5KP3u95bQpv";
   $transaction_key = "346HZ32z3fP4hTG2";
   $amount = "9.99";
-  $fp_sequence = "123";
+  $fp_sequence = rand ( 100, 10000 );
   $fp_timestamp = time();
   
   $fingerprint = hash_hmac("md5", $api_login_id . "^" . $fp_sequence . "^" . $fp_timestamp . "^" . $amount . "^",  $transaction_key);
